@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     switch(selectedIndex) {
       case 0: page = GeneratorPage(); break;
-      case 1: page = Placeholder(); break;
+      case 1: page = FavoritosPage(); break;
       default:
         throw UnimplementedError('No hay un widget para: $selectedIndex');
     }
@@ -160,5 +160,12 @@ class GeneratorPage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class FavoritosPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text("Favoritos");
   }
 }
