@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     Widget page;
-    
+
     switch(selectedIndex) {
       case 0: page = GeneratorPage(); break;
       case 1: page = Placeholder(); break;
@@ -62,33 +62,37 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('No hay un widget para: $selectedIndex');
     }
 
-    return Scaffold(
-      body: Row(
-        children: [
-          SafeArea(
-            child: NavigationRail(
-              extended: false,
-              destinations: [
-                NavigationRailDestination(
-                  icon: Icon(Icons.home), 
-                  label: Text("Inicio")),
-                NavigationRailDestination(
-                  icon: Icon(Icons.favorite), 
-                  label: Text("favoritos")),
-              ],
-              selectedIndex: selectedIndex,
-              onDestinationSelected: (value) {
-                setState(() {
-                  selectedIndex = value;
-                });
-              },
-            )
-          ),
-          Expanded(
-            child: Container(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              child: page,)),
-        ],)
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          body: Row(
+            children: [
+              SafeArea(
+                child: NavigationRail(
+                  extended: constraints.maxWidth >= 600,
+                  destinations: [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.home), 
+                      label: Text("Inicio")),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.favorite), 
+                      label: Text("favoritos")),
+                  ],
+                  selectedIndex: selectedIndex,
+                  onDestinationSelected: (value) {
+                    setState(() {
+                      selectedIndex = value;
+                    });
+                  },
+                )
+              ),
+              Expanded(
+                child: Container(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  child: page,)),
+            ],)
+        );
+      }
     );
   }
 }
